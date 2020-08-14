@@ -3,7 +3,7 @@ package qaguru.allure;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Test;
 
-public class BaseStepTest {
+public class BaseStepTests {
 
     private final String USERNAME = System.getProperty("qaguru.username");
     private final String PASSWORD = System.getProperty("qaguru.password");

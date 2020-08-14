@@ -1,15 +1,15 @@
 package qaguru.allure;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selectors.withText;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-public class LambdaStepTest {
+
+public class LambdaStepTests {
 
     private final String USERNAME = System.getProperty("qaguru.username");
     private final String PASSWORD = System.getProperty("qaguru.password");
@@ -28,8 +28,15 @@ public class LambdaStepTest {
             $("input[value='Sign in']").click();
         });
 
+//        step("Авторизуемся как пользователь " + USERNAME, () -> {
+//            open("/login");
+//            $(byName("login")).setValue(USERNAME);
+//            $(byName("password")).setValue(PASSWORD).pressEnter();
+//        });
+
         step("Переходим в репозиторий " + REPOSITORY, () -> {
             open(String.format("/%s/issues", REPOSITORY));
+//            open("/" + REPOSITORY + "/issues");
         });
 
         step("Создаем новую Issue с тайтлом " + ISSUE_TITLE, () -> {
@@ -39,7 +46,7 @@ public class LambdaStepTest {
         });
 
         step("Проверяем что создали Issue с тайтлом " + ISSUE_TITLE, () -> {
-            $("span.js-issue-title").should(Condition.text(ISSUE_TITLE));
+            $("span.js-issue-title").shouldHave(text(ISSUE_TITLE));
         });
 
     }
